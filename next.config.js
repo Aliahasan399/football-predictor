@@ -5,4 +5,4 @@ const nextConfig = {
   transpilePackages: ['@vercel/analytics', '@vercel/speed-insights', 'lucide-react', 'recharts'],
 };
 
-export default createNextIntlPlugin('./i18n/request.ts')(nextConfig);
+export default createNextIntlPlugin('./i18n/request.js')(nextConfig);
