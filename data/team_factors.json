@@ -1,0 +1,158 @@
+{
+  "Newcastle": {
+    "home_attack": 1.1445279866332498,
+    "home_defense": 0.8020050125313283,
+    "away_attack": 1.0438207779419004,
+    "away_defense": 1.2112259970457904
+  },
+  "Chelsea": {
+    "home_attack": 1.1027568922305766,
+    "home_defense": 0.710108604845447,
+    "away_attack": 1.1521418020679468,
+    "away_defense": 0.9256523879862137
+  },
+  "West Brom": {
+    "home_attack": 0.5012531328320802,
+    "home_defense": 1.3032581453634087,
+    "away_attack": 0.7877892663712457,
+    "away_defense": 1.4574101427868047
+  },
+  "Burnley": {
+    "home_attack": 0.5680868838763575,
+    "home_defense": 1.0582010582010584,
+    "away_attack": 0.7483998030526834,
+    "away_defense": 1.194813720663056
+  },
+  "Wolves": {
+    "home_attack": 0.7184628237259816,
+    "home_defense": 0.8354218880534671,
+    "away_attack": 0.6794682422451994,
+    "away_defense": 1.1619891678975873
+  },
+  "Watford": {
+    "home_attack": 0.5680868838763575,
+    "home_defense": 1.5371762740183794,
+    "away_attack": 0.6696208764155589,
+    "away_defense": 1.221073362875431
+  },
+  "Liverpool": {
+    "home_attack": 1.445279866332498,
+    "home_defense": 0.5263157894736843,
+    "away_attack": 1.4771048744460857,
+    "away_defense": 0.9158050221565731
+  },
+  "Brighton": {
+    "home_attack": 0.9022556390977444,
+    "home_defense": 0.7769423558897243,
+    "away_attack": 0.9945839487936977,
+    "away_defense": 1.102904972919744
+  },
+  "Leeds": {
+    "home_attack": 0.813143971038708,
+    "home_defense": 1.0693400167084377,
+    "away_attack": 1.0372558673888068,
+    "away_defense": 1.5099294272115544
+  },
+  "Nott'm Forest": {
+    "home_attack": 0.9022556390977444,
+    "home_defense": 0.9022556390977444,
+    "away_attack": 0.6499261447562777,
+    "away_defense": 1.5952732644017726
+  },
+  "Norwich": {
+    "home_attack": 0.40100250626566414,
+    "home_defense": 1.4369256474519632,
+    "away_attack": 0.43328409650418515,
+    "away_defense": 1.6149679960610537
+  },
+  "Sheffield United": {
+    "home_attack": 0.5179615705931495,
+    "home_defense": 1.4035087719298247,
+    "away_attack": 0.4726735598227474,
+    "away_defense": 1.6346627277203347
+  },
+  "Southampton": {
+    "home_attack": 0.7797270955165693,
+    "home_defense": 0.9579504316346422,
+    "away_attack": 0.735269981946496,
+    "away_defense": 1.6018381749548662
+  },
+  "Arsenal": {
+    "home_attack": 1.3366750208855471,
+    "home_defense": 0.659983291562239,
+    "away_attack": 1.3293943870014773,
+    "away_defense": 0.7877892663712457
+  },
+  "Bournemouth": {
+    "home_attack": 0.785296574770259,
+    "home_defense": 0.935672514619883,
+    "away_attack": 0.8665681930083703,
+    "away_defense": 1.6149679960610537
+  },
+  "Brentford": {
+    "home_attack": 0.9579504316346422,
+    "home_defense": 0.813143971038708,
+    "away_attack": 0.9978664040702445,
+    "away_defense": 1.2342031839816183
+  },
+  "Crystal Palace": {
+    "home_attack": 0.8771929824561403,
+    "home_defense": 0.8187134502923977,
+    "away_attack": 0.8173313638601674,
+    "away_defense": 1.191531265386509
+  },
+  "Leicester": {
+    "home_attack": 1.0136452241715401,
+    "home_defense": 0.8911166805903648,
+    "away_attack": 1.1816838995568686,
+    "away_defense": 1.2735926473001806
+  },
+  "West Ham": {
+    "home_attack": 1.01921470342523,
+    "home_defense": 0.8354218880534671,
+    "away_attack": 1.0044313146233383,
+    "away_defense": 1.2506154603643524
+  },
+  "Tottenham": {
+    "home_attack": 1.2364243943191313,
+    "home_defense": 0.760233918128655,
+    "away_attack": 1.309699655342196,
+    "away_defense": 1.1619891678975873
+  },
+  "Man City": {
+    "home_attack": 1.77109440267335,
+    "home_defense": 0.5430242272347535,
+    "away_attack": 1.5755785327424914,
+    "away_defense": 0.5908419497784343
+  },
+  "Luton": {
+    "home_attack": 0.935672514619883,
+    "home_defense": 1.2364243943191313,
+    "away_attack": 0.9453471196454948,
+    "away_defense": 1.8906942392909896
+  },
+  "Fulham": {
+    "home_attack": 0.7908660540239488,
+    "home_defense": 0.9022556390977444,
+    "away_attack": 0.8665681930083703,
+    "away_defense": 1.1291646151321189
+  },
+  "Everton": {
+    "home_attack": 0.7435254803675856,
+    "home_defense": 0.8187134502923977,
+    "away_attack": 0.7385524372230429,
+    "away_defense": 1.221073362875431
+  },
+  "Aston Villa": {
+    "home_attack": 1.1612364243943192,
+    "home_defense": 0.8771929824561403,
+    "away_attack": 0.9354997538158543,
+    "away_defense": 1.0044313146233383
+  },
+  "Man United": {
+    "home_attack": 1.1445279866332498,
+    "home_defense": 0.735171261487051,
+    "away_attack": 1.0635155096011817,
+    "away_defense": 1.1225997045790252
+  }
+}
