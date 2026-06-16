@@ -64,7 +64,7 @@ football-predictor/
 cd backend
 python -m venv venv
 source venv/bin/activate   # Linux/Mac
-# venv\Scripts\activate    # Windows
+# venv\\Scripts\\activate    # Windows
 pip install -r requirements.txt
 python scripts/download_data.py   # Downloads PL data into data/
 ```
@@ -85,6 +85,8 @@ uvicorn main:app --reload --port 8000
 ```
 
 Test: http://localhost:8000/matches (should return JSON with upcoming matches and predictions).
+
+You can also view the interactive web UI at http://localhost:8000/ui (no separate frontend required).
 
 ### 2. Frontend Setup (Node.js)
 
