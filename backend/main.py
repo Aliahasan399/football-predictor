@@ -1,6 +1,7 @@
 import os
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 import pandas as pd
 import requests
 from model import load_historical_data, compute_team_factors, predict_match, get_team_form, compute_lambda, simulate_match
@@ -176,3 +177,8 @@ def health():
         "data_loaded": historical_df is not None,
         "teams_count": len(team_factors) if team_factors else 0,
     }
+
+@app.get("/ui", response_class=HTMLResponse)
+def get_ui():
+    with open("templates/index.html") as f:
+        return f.read()

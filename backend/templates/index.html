@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Football AI Predictor</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .controls { margin-bottom: 20px; display: flex; gap: 10px; align-items: center; }
+        .controls input, .controls button { padding: 8px 12px; font-size: 16px; border: 1px solid #ddd; border-radius: 4px; }
+        .controls button { background: #007bff; color: white; cursor: pointer; border: none; }
+        .controls button:hover { background: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f4f4f4; }
+        tr:hover { background-color: #f9f9f9; cursor: pointer; }
+        .details { margin-top: 20px; padding: 15px; border: 1px solid #ddd; background: #fafafa; border-radius: 4px; }
+        .details h3 { margin-top: 0; }
+        .error { color: #dc3545; }
+        .loading { color: #007bff; }
+        .health { color: #28a745; }
+        .flag { width: 24px; vertical-align: middle; margin-right: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚽ Football AI Predictor</h1>
+        <div class="controls">
+            <label for="compId">Competition ID:</label>
+            <input type="number" id="compId" value="2021" min="1">
+            <button onclick="loadMatches()">Load Matches</button>
+            <span id="status"></span>
+        </div>
+        <h2>Upcoming Matches</h2>
+        <table id="matchesTable">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Home Team</th>
+                    <th>Away Team</th>
+                    <th>Home Win %</th>
+                    <th>Draw %</th>
+                    <th>Away Win %</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div id="matchDetails" class="details" style="display:none;">
+            <h3>Match Details</h3>
+            <div id="detailsContent"></div>
+        </div>
+    </div>
+    <script>
+        async function loadMatches() {
+            const compId = document.getElementById('compId').value;
+            const status = document.getElementById('status');
+            status.textContent = 'Loading...';
+            status.className = 'loading';
+            try {
+                const response = await fetch(`/matches?competition_id=${compId}`);
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.detail || 'Failed to fetch matches');
+                }
+                const data = await response.json();
+                displayMatches(data.matches);
+                status.textContent = `Loaded ${data.matches.length} matches.`;
+                status.className = '';
+            } catch (err) {
+                status.textContent = 'Error: ' + err.message;
+                status.className = 'error';
+            }
+        }
+
+        function displayMatches(matches) {
+            const tbody = document.querySelector('#matchesTable tbody');
+            tbody.innerHTML = '';
+            matches.forEach(match => {
+                const row = document.createElement('tr');
+                const homeCrest = match.home_team_crest ? `<img src="${match.home_team_crest}" class="flag" alt="">` : '';
+                const awayCrest = match.away_team_crest ? `<img src="${match.away_team_crest}" class="flag" alt="">` : '';
+                row.innerHTML = `
+                    <td>${match.date}</td>
+                    <td>${homeCrest}${match.home_team}</td>
+                    <td>${awayCrest}${match.away_team}</td>
+                    <td>${match.prediction.home_win}%</td>
+                    <td>${match.prediction.draw}%</td>
+                    <td>${match.prediction.away_win}%</td>
+                `;
+                row.onclick = () => loadMatchDetails(match.id, row);
+                tbody.appendChild(row);
+            });
+        }
+
+        async function loadMatchDetails(matchId, row) {
+            // Highlight selected row
+            document.querySelectorAll('#matchesTable tr').forEach(r => r.style.backgroundColor = '');
+            row.style.backgroundColor = '#e0f7fa';
+            const detailsDiv = document.getElementById('matchDetails');
+            const contentDiv = document.getElementById('detailsContent');
+            contentDiv.innerHTML = '<p>Loading details...</p>';
+            detailsDiv.style.display = 'block';
+            try {
+                const response = await fetch(`/match/${matchId}`);
+                if (!response.ok) {
+                    const err = await response.json();
+                    throw new Error(err.detail || 'Failed to fetch match details');
+                }
+                const data = await response.json();
+                let html = `
+                    <p><strong>Match:</strong> ${data.match.home_team} vs ${data.match.away_team} on ${data.match.date}</p>
+                    <p><strong>Status:</strong> ${data.match.status}</p>
+                    <h4>Prediction</h4>
+                    <ul>
+                        <li>Home Win: <strong>${data.prediction.home_win}%</strong></li>
+                        <li>Draw: <strong>${data.prediction.draw}%</strong></li>
+                        <li>Away Win: <strong>${data.prediction.away_win}%</strong></li>
+                    </ul>
+                `;
+                if (data.model_data) {
+                    html += `
+                        <h4>Model Statistics</h4>
+                        <ul>
+                            <li>Lambda Home: ${data.model_data.lambda_home.toFixed(3)}</li>
+                            <li>Lambda Away: ${data.model_data.lambda_away.toFixed(3)}</li>
+                            <li>Home Attack: ${data.model_data.home_attack.toFixed(3)}</li>
+                            <li>Home Defense: ${data.model_data.home_defense.toFixed(3)}</li>
+                            <li>Away Attack: ${data.model_data.away_attack.toFixed(3)}</li>
+                            <li>Away Defense: ${data.model_data.away_defense.toFixed(3)}</li>
+                            <li>Avg Home Goals: ${data.model_data.avg_home_goals.toFixed(3)}</li>
+                            <li>Avg Away Goals: ${data.model_data.avg_away_goals.toFixed(3)}</li>
+                        </ul>
+                    `;
+                }
+                html += `<h4>Recent Form (last 5 matches)</h4><ul><li>${data.team_stats.home_team.form_last_5} pts/game (${data.match.home_team})</li><li>${data.team_stats.away_team.form_last_5} pts/game (${data.match.away_team})</li></ul>`;
+                contentDiv.innerHTML = html;
+            } catch (err) {
+                contentDiv.innerHTML = '<p class="error">Error: ' + err.message + '</p>';
+            }
+        }
+
+        // Load matches on page load
+        window.onload = loadMatches;
+    </script>
+</body>
+</html>
